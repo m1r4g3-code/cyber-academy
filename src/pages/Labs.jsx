@@ -28,7 +28,7 @@ export default function Labs() {
         {labs.map((lab) => {
           const lp = labProgress[lab.id] || { pct: 0, done: 0, total: lab.steps.length, complete: false }
           return (
-            <Link key={lab.id} to={`/lab/${lab.id}`} className={`lab-card card ${lp.complete ? 'done' : ''}`}>
+            <Link key={lab.id} to={`/lab/${lab.id}`} className={`lab-card card wk-${lab.week} ${lp.complete ? 'done' : ''}`}>
               <div className="lab-emoji">{lab.emoji}</div>
               <div className="lc-body">
                 <div className="lc-title">{lab.title}</div>

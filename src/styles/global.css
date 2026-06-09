@@ -152,14 +152,29 @@ button {
 }
 
 /* ============================================================
-   GLOW-IN-THE-DARK WEEK THEMES
-   Applied by setting data-week="N" on <html> while viewing a
-   week or its lessons. Neon accent on a true-black backdrop.
-   Declared AFTER the light/dark tokens so it overrides them.
+   WEEK COLOUR THEMES  (works in BOTH light and dark mode)
+   - data-week="N" on <html> themes a whole week/lesson page.
+   - .wk-N helper class themes a single element (tile, lab card, nav).
+   The neon GLOW-on-black only kicks in when dark mode is active,
+   so the light/dark toggle is a real switch:
+     • Light mode = the week's colour as accent on a clean backdrop
+     • Dark mode  = full glow-in-the-dark neon on true black
    ============================================================ */
 
-/* Shared neon-on-black base for every week theme */
-html[data-week] {
+/* ---- Per-week accent colour (applies in light AND dark) ---- */
+html[data-week="1"], .wk-1 { --accent: #00c400; --accent-hover: #00e000; --accent-soft: rgba(0, 196, 0, 0.14); }
+html[data-week="2"], .wk-2 { --accent: #0095c8; --accent-hover: #00aadf; --accent-soft: rgba(0, 149, 200, 0.14); }
+html[data-week="3"], .wk-3 { --accent: #d4159e; --accent-hover: #ec27b3; --accent-soft: rgba(212, 21, 158, 0.14); }
+html[data-week="4"], .wk-4 { --accent: #8b3dff; --accent-hover: #a05cff; --accent-soft: rgba(139, 61, 255, 0.16); }
+
+/* In DARK mode, brighten the week accent to true neon ---- */
+html[data-theme="dark"][data-week="1"], [data-theme="dark"] .wk-1 { --accent: #39ff14; --accent-hover: #66ff48; --accent-soft: rgba(57, 255, 20, 0.18); }
+html[data-theme="dark"][data-week="2"], [data-theme="dark"] .wk-2 { --accent: #18e0ff; --accent-hover: #5cecff; --accent-soft: rgba(24, 224, 255, 0.18); }
+html[data-theme="dark"][data-week="3"], [data-theme="dark"] .wk-3 { --accent: #ff2bd6; --accent-hover: #ff66e2; --accent-soft: rgba(255, 43, 214, 0.18); }
+html[data-theme="dark"][data-week="4"], [data-theme="dark"] .wk-4 { --accent: #b65cff; --accent-hover: #c986ff; --accent-soft: rgba(182, 92, 255, 0.2); }
+
+/* ---- GLOW-IN-THE-DARK: only when a week theme is active in DARK mode ---- */
+html[data-week][data-theme="dark"] {
   --bg: #000000;
   --bg-elevated: #070707;
   --bg-sidebar: rgba(0, 0, 0, 0.82);
@@ -175,54 +190,50 @@ html[data-week] {
   --shadow-md: 0 4px 18px rgba(0, 0, 0, 0.7);
   --shadow-lg: 0 12px 44px rgba(0, 0, 0, 0.8);
 }
-
-/* Per-week neon accent (also reusable as .wk-N helper classes) */
-html[data-week="1"], .wk-1 { --accent: #39ff14; --accent-hover: #66ff48; --accent-soft: rgba(57, 255, 20, 0.16); }
-html[data-week="2"], .wk-2 { --accent: #18e0ff; --accent-hover: #5cecff; --accent-soft: rgba(24, 224, 255, 0.16); }
-html[data-week="3"], .wk-3 { --accent: #ff2bd6; --accent-hover: #ff66e2; --accent-soft: rgba(255, 43, 214, 0.16); }
-html[data-week="4"], .wk-4 { --accent: #b65cff; --accent-hover: #c986ff; --accent-soft: rgba(182, 92, 255, 0.18); }
-
-/* ---- Glow effects (use the active --accent so each week glows its colour) ---- */
-html[data-week] h1,
-html[data-week] h2 {
+html[data-week][data-theme="dark"] h1,
+html[data-week][data-theme="dark"] h2 {
   text-shadow: 0 0 14px var(--accent), 0 0 34px var(--accent-soft);
 }
-html[data-week] .eyebrow,
-html[data-week] .p-eyebrow {
+html[data-week][data-theme="dark"] .eyebrow,
+html[data-week][data-theme="dark"] .p-eyebrow {
   text-shadow: 0 0 12px var(--accent-soft);
 }
-html[data-week] .ring-fill {
-  filter: drop-shadow(0 0 6px var(--accent));
-}
-html[data-week] .btn:not(.secondary):not(.ghost) {
+html[data-week][data-theme="dark"] .btn:not(.secondary):not(.ghost) {
   box-shadow: 0 0 18px var(--accent-soft), 0 0 4px var(--accent);
 }
-html[data-week] .nav-link.active {
+html[data-week][data-theme="dark"] .nav-link.active {
   box-shadow: inset 0 0 0 1px var(--accent-soft), 0 0 16px var(--accent-soft);
 }
-html[data-week] .day-badge,
-html[data-week] .lab-emoji,
-html[data-week] .streak,
-html[data-week] .lab-check {
+html[data-week][data-theme="dark"] .day-badge,
+html[data-week][data-theme="dark"] .lab-emoji,
+html[data-week][data-theme="dark"] .streak,
+html[data-week][data-theme="dark"] .lab-check {
   box-shadow: 0 0 14px var(--accent-soft);
 }
-html[data-week] .lesson-card:hover,
-html[data-week] .lab-card:hover,
-html[data-week] .week-tile:hover {
-  box-shadow: 0 0 22px var(--accent-soft);
-  border-color: var(--accent);
-}
-html[data-week] .objectives,
-html[data-week] .practical,
-html[data-week] .week-banner,
-html[data-week] .quiz {
+html[data-week][data-theme="dark"] .objectives,
+html[data-week][data-theme="dark"] .practical,
+html[data-week][data-theme="dark"] .week-banner,
+html[data-week][data-theme="dark"] .quiz {
   border-color: var(--accent-soft);
 }
-/* keep the sidebar wordmark/logo readable + glowing */
-html[data-week] .sidebar-brand { text-shadow: 0 0 12px var(--accent-soft); }
+html[data-week][data-theme="dark"] .sidebar-brand { text-shadow: 0 0 12px var(--accent-soft); }
 
-/* Helper-class glow for week tiles/nav shown OUTSIDE a week theme
-   (e.g. on the Dashboard) so each week reads in its own colour */
-.wk-1 .ring-fill, .wk-2 .ring-fill, .wk-3 .ring-fill, .wk-4 .ring-fill {
-  filter: drop-shadow(0 0 5px var(--accent));
+/* ---- Colour rings everywhere; glow them in dark mode ---- */
+.ring-wrap .ring-fill { transition: stroke-dashoffset 0.8s var(--ease), filter 0.4s var(--ease); }
+html[data-week][data-theme="dark"] .ring-fill,
+[data-theme="dark"] .wk-1 .ring-fill,
+[data-theme="dark"] .wk-2 .ring-fill,
+[data-theme="dark"] .wk-3 .ring-fill,
+[data-theme="dark"] .wk-4 .ring-fill {
+  filter: drop-shadow(0 0 6px var(--accent));
+}
+
+/* ---- Extend week colour to Dashboard tiles & Lab cards (both modes) ---- */
+[data-theme="dark"] .week-tile:hover,
+[data-theme="dark"] .lab-card.wk-1:hover,
+[data-theme="dark"] .lab-card.wk-2:hover,
+[data-theme="dark"] .lab-card.wk-3:hover,
+[data-theme="dark"] .lab-card.wk-4:hover {
+  box-shadow: 0 0 22px var(--accent-soft);
+  border-color: var(--accent);
 }

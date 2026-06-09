@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom'
 import ReactMarkdown from 'react-markdown'
 import { getLab } from '../data/labs'
 import { useProgress } from '../context/ProgressContext'
+import { useWeekTheme } from '../hooks/useWeekTheme'
 import ProgressRing from '../components/ProgressRing'
 
 const TRACK_LABEL = { coding: 'Coding', cyber: 'Cybersecurity', both: 'Coding + Cyber' }
@@ -11,6 +12,9 @@ export default function LabView() {
   const { labId } = useParams()
   const lab = getLab(labId)
   const { labSteps, toggleLabStep, labProgress } = useProgress()
+
+  // theme the lab in its related week's colour
+  useWeekTheme(lab?.week)
 
   useEffect(() => { window.scrollTo(0, 0) }, [labId])
 
