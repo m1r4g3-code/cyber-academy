@@ -19,8 +19,12 @@ html {
 
 /* ---- Theme tokens (light is default) ---- */
 :root {
-  --font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
-    "Segoe UI", system-ui, Roboto, Helvetica, Arial, sans-serif;
+  /* Monospace for body/UI, futuristic display for headings & labels */
+  --font: "JetBrains Mono", ui-monospace, "SF Mono", "Cascadia Code", Menlo,
+    Consolas, monospace;
+  --font-display: "Orbitron", "JetBrains Mono", ui-monospace, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", "Cascadia Code", Menlo,
+    Consolas, monospace;
 
   --accent: #0071e3;
   --accent-hover: #0077ed;
@@ -88,21 +92,23 @@ body {
   font-family: var(--font);
   background: var(--bg);
   color: var(--text);
-  line-height: 1.5;
-  letter-spacing: -0.01em;
+  font-size: 0.94rem;
+  line-height: 1.65;
+  letter-spacing: 0;
   transition: background 0.4s var(--ease), color 0.4s var(--ease);
 }
 
 h1, h2, h3, h4 {
-  font-weight: 600;
-  letter-spacing: -0.022em;
-  line-height: 1.1;
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  line-height: 1.18;
   color: var(--text);
 }
 
-h1 { font-size: clamp(2rem, 4vw, 3rem); }
-h2 { font-size: 1.6rem; }
-h3 { font-size: 1.2rem; }
+h1 { font-size: clamp(1.7rem, 3.4vw, 2.6rem); }
+h2 { font-size: 1.4rem; }
+h3 { font-size: 1.1rem; letter-spacing: 0.02em; }
 
 p { color: var(--text); }
 

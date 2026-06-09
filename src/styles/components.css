@@ -765,6 +765,18 @@
 }
 .search-input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); }
 
+/* ---------- Typography accents ---------- */
+/* Futuristic display font for short labels + numerals */
+.eyebrow, .p-eyebrow, .cert-eyebrow { font-family: var(--font-display); }
+.ring-pct, .stat-num, .qr-score, .nav-week-num { font-family: var(--font-display); }
+.cert-name, .cert-h { font-family: var(--font-display); }
+.sidebar-brand { font-family: var(--font-display); font-size: 1rem; letter-spacing: 0.02em; }
+.btn { letter-spacing: 0.02em; }
+
+/* Code stays in JetBrains Mono (matches the body, distinct via background) */
+.prose code, .prose pre, .prose pre code,
+.pyrunner-editor, .pyrunner-output, .notes textarea { font-family: var(--font-mono); }
+
 /* ---------- Icons (Lucide) ---------- */
 svg.lucide { vertical-align: middle; flex-shrink: 0; }
 .head-with-icon { display: inline-flex; align-items: center; gap: 8px; }
