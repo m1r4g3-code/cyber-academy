@@ -237,3 +237,41 @@ html[data-week][data-theme="dark"] .ring-fill,
   box-shadow: 0 0 22px var(--accent-soft);
   border-color: var(--accent);
 }
+
+/* ============================================================
+   PULSING GLOW — breathes the neon on key elements in dark
+   week mode. Disabled when the user prefers reduced motion.
+   ============================================================ */
+@keyframes pulse-ring {
+  0%, 100% { filter: drop-shadow(0 0 4px var(--accent)); }
+  50%      { filter: drop-shadow(0 0 12px var(--accent)); }
+}
+@keyframes pulse-box {
+  0%, 100% { box-shadow: 0 0 10px var(--accent-soft); }
+  50%      { box-shadow: 0 0 22px var(--accent-soft), 0 0 6px var(--accent); }
+}
+@keyframes pulse-text {
+  0%, 100% { text-shadow: 0 0 10px var(--accent-soft); }
+  50%      { text-shadow: 0 0 16px var(--accent), 0 0 34px var(--accent-soft); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html[data-week][data-theme="dark"] .ring-fill {
+    animation: pulse-ring 3s var(--ease) infinite;
+  }
+  html[data-week][data-theme="dark"] .day-badge,
+  html[data-week][data-theme="dark"] .lab-emoji,
+  html[data-week][data-theme="dark"] .lab-check,
+  html[data-week][data-theme="dark"] .streak {
+    animation: pulse-box 3s var(--ease) infinite;
+  }
+  html[data-week][data-theme="dark"] .hero h1,
+  html[data-week][data-theme="dark"] .lesson-top h1 {
+    animation: pulse-text 3.2s var(--ease) infinite;
+  }
+  /* completed badges stay solid green — don't pulse them */
+  html[data-week][data-theme="dark"] .lesson-card.done .day-badge,
+  html[data-week][data-theme="dark"] .lab-step.checked .lab-check {
+    animation: none;
+  }
+}

@@ -14,6 +14,7 @@ export const labs = [
     track: 'coding',
     time: '60–90 min',
     week: 1,
+    lessonId: 'w1d7',
     summary: 'Combine a unit converter, a number-guessing game, and a to-do list into one menu-driven Python program. Your first real portfolio project.',
     objectives: [
       'Structure a program with functions and a menu loop',
@@ -47,6 +48,7 @@ export const labs = [
     track: 'both',
     time: '60–90 min',
     week: 2,
+    lessonId: 'w2d14',
     summary: 'Build a Python tool that reads a list of hosts from a file and reports which are online — your first network/security utility.',
     objectives: [
       'Run system commands from Python with subprocess',
@@ -79,6 +81,7 @@ export const labs = [
     track: 'both',
     time: '75–100 min',
     week: 3,
+    lessonId: 'w3d17',
     summary: 'Build a two-in-one security tool: a password-strength checker and a SHA-256 hash/verify utility — putting cryptography concepts into code.',
     objectives: [
       'Use hashlib to hash and verify passwords',
@@ -112,6 +115,7 @@ export const labs = [
     track: 'cyber',
     time: '75–100 min',
     week: 3,
+    lessonId: 'w3d21',
     summary: 'Build a defensive (blue-team) tool that scans an auth log, flags failed logins, and detects brute-force sources — a miniature SIEM rule.',
     objectives: [
       'Parse a log file line by line',
@@ -144,6 +148,7 @@ export const labs = [
     track: 'both',
     time: '75–100 min',
     week: 4,
+    lessonId: 'w4d24',
     summary: 'Build a simplified Nmap in Python using sockets to discover open TCP ports — scanning only your own machine or authorised targets.',
     objectives: [
       'Use sockets to test TCP connectivity',
@@ -176,6 +181,7 @@ export const labs = [
     track: 'both',
     time: '3 sessions (Days 26–28)',
     week: 4,
+    lessonId: 'w4d26',
     summary: 'Combine your earlier tools — port scanner, password tool, hash utility, and log analyzer — into one polished, documented Security Toolkit, then publish it to GitHub.',
     objectives: [
       'Integrate multiple modules behind one interface',
@@ -205,4 +211,8 @@ export const allLabs = labs
 
 export function getLab(id) {
   return labs.find((l) => l.id === id) || null
+}
+
+export function getLabByLesson(lessonId) {
+  return labs.find((l) => l.lessonId === lessonId) || null
 }

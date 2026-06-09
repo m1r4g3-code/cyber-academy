@@ -28,7 +28,10 @@ export default function LabView() {
   return (
     <article>
       <div className="lesson-top">
-        <div className="crumb"><Link to="/labs">Labs</Link> › {lab.title}</div>
+        <div className="crumb">
+          <Link to="/labs">Labs</Link> › {lab.title}
+          {lab.lessonId && <> · <Link to={`/lesson/${lab.lessonId}`}>↩ related lesson (Week {lab.week})</Link></>}
+        </div>
         <div className="eyebrow" style={{ color: 'var(--accent)', fontWeight: 600, fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
           {lab.emoji} {lab.difficulty} · {TRACK_LABEL[lab.track]} · {lab.time}
         </div>

@@ -593,9 +593,49 @@
   font-size: 1.7rem;
 }
 
+.related-lab {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 20px 22px;
+  margin: 24px 0;
+  transition: background 0.2s var(--ease), transform 0.15s var(--ease), box-shadow 0.2s var(--ease);
+}
+.related-lab:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); background: var(--card-hover); }
+.related-lab .btn { flex-shrink: 0; }
+
 @media (max-width: 600px) {
-  .lab-card, .lab-step, .labs-promo { padding: 16px 16px; gap: 14px; }
+  .lab-card, .lab-step, .labs-promo, .related-lab { padding: 16px 16px; gap: 14px; }
   .lab-card .ring-wrap { display: none; }   /* hide ring on narrow cards to save space */
+  .related-lab { flex-direction: column; align-items: flex-start; }
+  .related-lab .btn { width: 100%; }
+}
+
+/* ---------- Reset progress ---------- */
+.reset-zone { margin-top: 56px; padding-top: 28px; border-top: 1px solid var(--border); }
+.btn-reset {
+  font-size: 0.85rem;
+  color: var(--text-tertiary);
+  padding: 8px 14px;
+  border-radius: 980px;
+  transition: color 0.2s var(--ease), background 0.2s var(--ease);
+}
+.btn-reset:hover { color: #ff3b30; background: rgba(255, 59, 48, 0.1); }
+.reset-confirm {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 20px 24px;
+  border-color: rgba(255, 59, 48, 0.3);
+}
+.reset-actions { display: flex; gap: 10px; flex-shrink: 0; }
+.btn.danger { background: #ff3b30; color: #fff; }
+.btn.danger:hover { background: #ff5247; }
+
+@media (max-width: 600px) {
+  .reset-confirm { flex-direction: column; align-items: stretch; }
+  .reset-actions .btn { flex: 1; }
 }
 
 /* ---------- Misc ---------- */

@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { curriculum } from '../data/curriculum'
 import { useProgress } from '../context/ProgressContext'
@@ -6,7 +7,8 @@ import StreakBadge from '../components/StreakBadge'
 
 export default function Dashboard() {
   const navigate = useNavigate()
-  const { overallPct, completedCount, totalLessons, weekProgress, nextLesson, quizScores, labsCompletedCount, totalLabs } = useProgress()
+  const { overallPct, completedCount, totalLessons, weekProgress, nextLesson, quizScores, labsCompletedCount, totalLabs, resetProgress } = useProgress()
+  const [confirmReset, setConfirmReset] = useState(false)
 
   const quizzesTaken = Object.keys(quizScores).length
   const greeting = (() => {
@@ -89,6 +91,27 @@ export default function Dashboard() {
         </div>
         <span className="lc-arrow">›</span>
       </Link>
+
+      <div className="reset-zone">
+        {!confirmReset ? (
+          <button className="btn-reset" onClick={() => setConfirmReset(true)}>
+            Reset all progress
+          </button>
+        ) : (
+          <div className="reset-confirm card">
+            <div>
+              <strong>Reset everything?</strong>
+              <div className="muted" style={{ fontSize: '0.85rem', marginTop: 4 }}>
+                This clears completed lessons, quiz scores, notes, lab steps, and your streak. Your theme is kept. This cannot be undone.
+              </div>
+            </div>
+            <div className="reset-actions">
+              <button className="btn secondary" onClick={() => setConfirmReset(false)}>Cancel</button>
+              <button className="btn danger" onClick={() => { resetProgress(); setConfirmReset(false) }}>Yes, reset</button>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   )
 }

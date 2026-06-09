@@ -75,6 +75,15 @@ export function ProgressProvider({ children }) {
     setNotes((prev) => ({ ...prev, [lessonId]: text }))
   }, [setNotes])
 
+  const resetProgress = useCallback(() => {
+    setCompleted({})
+    setQuizScores({})
+    setNotes({})
+    setLabSteps({})
+    setStreak({ count: 0, lastStudiedDate: null })
+    // theme is intentionally preserved
+  }, [setCompleted, setQuizScores, setNotes, setLabSteps, setStreak])
+
   const toggleLabStep = useCallback((labId, stepIndex) => {
     setLabSteps((prev) => {
       const lab = { ...(prev[labId] || {}) }
@@ -124,7 +133,7 @@ export function ProgressProvider({ children }) {
 
   const value = {
     completed, quizScores, notes, streak, theme, labSteps,
-    toggleTheme, toggleComplete, saveQuizScore, saveNote, toggleLabStep,
+    toggleTheme, toggleComplete, saveQuizScore, saveNote, toggleLabStep, resetProgress,
     totalLessons, completedCount, overallPct, weekProgress, nextLesson,
     labProgress, labsCompletedCount, totalLabs: labs.length,
   }

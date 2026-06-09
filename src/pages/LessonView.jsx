@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { useParams, Link, useNavigate } from 'react-router-dom'
 import ReactMarkdown from 'react-markdown'
 import { getLesson, getAdjacent } from '../data/curriculum'
+import { getLabByLesson } from '../data/labs'
 import { useProgress } from '../context/ProgressContext'
 import { useWeekTheme } from '../hooks/useWeekTheme'
 import Quiz from '../components/Quiz'
@@ -27,6 +28,7 @@ export default function LessonView() {
 
   const done = !!completed[lesson.id]
   const { prev, next } = getAdjacent(lesson.id)
+  const relatedLab = getLabByLesson(lesson.id)
 
   function handleComplete() {
     toggleComplete(lesson.id)
@@ -72,6 +74,20 @@ export default function LessonView() {
         </ol>
         <div className="timer">Set a 30-minute timer and complete the steps above hands-on.</div>
       </div>
+
+      {relatedLab && (
+        <Link to={`/lab/${relatedLab.id}`} className="related-lab card">
+          <div className="lab-emoji">{relatedLab.emoji}</div>
+          <div>
+            <div className="muted" style={{ fontSize: '0.8rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+              Go deeper · Hands-on Lab
+            </div>
+            <div className="lc-title">{relatedLab.title}</div>
+            <div className="wt-sub">{relatedLab.summary}</div>
+          </div>
+          <span className="btn">Start lab →</span>
+        </Link>
+      )}
 
       <Quiz lessonId={lesson.id} questions={lesson.quiz} />
 
