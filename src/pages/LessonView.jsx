@@ -7,6 +7,7 @@ import { useProgress } from '../context/ProgressContext'
 import { useWeekTheme } from '../hooks/useWeekTheme'
 import Quiz from '../components/Quiz'
 import NotesPanel from '../components/NotesPanel'
+import PyRunner from '../components/PyRunner'
 
 const TRACK_LABEL = { coding: 'Coding', cyber: 'Cybersecurity', both: 'Coding + Cyber' }
 
@@ -87,6 +88,10 @@ export default function LessonView() {
           </div>
           <span className="btn">Start lab →</span>
         </Link>
+      )}
+
+      {(lesson.track === 'coding' || lesson.track === 'both') && (
+        <PyRunner starter={lesson.starter} />
       )}
 
       <Quiz lessonId={lesson.id} questions={lesson.quiz} />

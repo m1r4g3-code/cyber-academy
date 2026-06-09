@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { curriculum } from '../data/curriculum'
 import { useProgress } from '../context/ProgressContext'
@@ -7,8 +7,37 @@ import StreakBadge from '../components/StreakBadge'
 
 export default function Dashboard() {
   const navigate = useNavigate()
-  const { overallPct, completedCount, totalLessons, weekProgress, nextLesson, quizScores, labsCompletedCount, totalLabs, resetProgress } = useProgress()
+  const { overallPct, completedCount, totalLessons, weekProgress, nextLesson, quizScores, labsCompletedCount, totalLabs, resetProgress, exportData, importData } = useProgress()
   const [confirmReset, setConfirmReset] = useState(false)
+  const [dataMsg, setDataMsg] = useState('')
+  const fileRef = useRef(null)
+
+  function handleExport() {
+    const blob = new Blob([JSON.stringify(exportData(), null, 2)], { type: 'application/json' })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = 'cyber-academy-progress.json'
+    a.click()
+    URL.revokeObjectURL(url)
+    setDataMsg('Progress exported ✓')
+  }
+
+  function handleImportFile(e) {
+    const file = e.target.files?.[0]
+    if (!file) return
+    const reader = new FileReader()
+    reader.onload = () => {
+      try {
+        const ok = importData(JSON.parse(reader.result))
+        setDataMsg(ok ? 'Progress imported ✓' : 'That file isn\'t a Cyber Academy backup.')
+      } catch {
+        setDataMsg('Could not read that file.')
+      }
+    }
+    reader.readAsText(file)
+    e.target.value = '' // allow re-importing the same file
+  }
 
   const quizzesTaken = Object.keys(quizScores).length
   const greeting = (() => {
@@ -93,6 +122,15 @@ export default function Dashboard() {
       </Link>
 
       <div className="reset-zone">
+        <div className="data-row">
+          <button className="btn secondary" onClick={handleExport}>⬇ Export progress</button>
+          <button className="btn secondary" onClick={() => fileRef.current?.click()}>⬆ Import progress</button>
+          <input ref={fileRef} type="file" accept="application/json,.json" onChange={handleImportFile} hidden />
+          {dataMsg && <span className="muted" style={{ fontSize: '0.85rem' }}>{dataMsg}</span>}
+        </div>
+        <p className="muted" style={{ fontSize: '0.8rem', margin: '10px 0 20px' }}>
+          Your progress is saved in this browser. Export a backup to keep it safe or move it to another device.
+        </p>
         {!confirmReset ? (
           <button className="btn-reset" onClick={() => setConfirmReset(true)}>
             Reset all progress

@@ -16,6 +16,7 @@ export const curriculum = [
       {
         id: 'w1d1', week: 1, day: 1, track: 'coding', duration: '4 hrs',
         title: 'Setup & Your First Program',
+        starter: '# Try the Day 1 practical here.\nname = input("What\'s your name? ")\nage = int(input("How old are you? "))\nyear = 2026 + (100 - age)\nprint(f"Hello, {name}!")\nprint(f"You will turn 100 in the year {year}.")\n',
         objectives: [
           'Install Python and VS Code and run a script',
           'Understand how computers store data as binary',
@@ -50,6 +51,7 @@ export const curriculum = [
       {
         id: 'w1d2', week: 1, day: 2, track: 'coding', duration: '4 hrs',
         title: 'Variables, Strings & Numbers',
+        starter: '# Day 2: unit converter\nmiles = float(input("Distance in miles? "))\nprint(f"{miles} miles = {miles * 1.60934:.2f} km")\n',
         objectives: [
           'Work with strings, integers, and floats',
           'Combine variables into output (f-strings)',
@@ -82,6 +84,7 @@ export const curriculum = [
       {
         id: 'w1d3', week: 1, day: 3, track: 'coding', duration: '4 hrs',
         title: 'Making Decisions: Conditionals',
+        starter: '# Day 3: try the grading logic, then build the guessing game\nscore = int(input("Enter a score (0-100): "))\nif score >= 90:\n    print("A")\nelif score >= 60:\n    print("Pass")\nelse:\n    print("Try again")\n',
         objectives: [
           'Use if / elif / else',
           'Apply comparison and logical operators',
@@ -113,6 +116,7 @@ export const curriculum = [
       {
         id: 'w1d4', week: 1, day: 4, track: 'coding', duration: '4 hrs',
         title: 'Repeating Work: Loops',
+        starter: '# Day 4: even numbers 1-20 using a loop and the % operator\nfor n in range(1, 21):\n    if n % 2 == 0:\n        print(n)\n',
         objectives: [
           'Use for loops with range()',
           'Use while loops and avoid infinite loops',
@@ -144,6 +148,7 @@ export const curriculum = [
       {
         id: 'w1d5', week: 1, day: 5, track: 'coding', duration: '4 hrs',
         title: 'Lists & Dictionaries',
+        starter: '# Day 5: lists and dictionaries\ntasks = ["email", "lunch", "code"]\ntasks.append("gym")\nfor t in tasks:\n    print("-", t)\n\nuser = {"name": "Sam", "level": 3}\nprint(f"{user[\'name\']} is level {user[\'level\']}")\n',
         objectives: [
           'Store many values in a list',
           'Add, remove, and loop over list items',

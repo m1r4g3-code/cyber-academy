@@ -12,6 +12,7 @@ const K = {
   streak: 'cyber-academy:streak',
   theme: 'cyber-academy:theme',
   labSteps: 'cyber-academy:labSteps',
+  name: 'cyber-academy:name',
 }
 
 /* ---- date helpers (local time, YYYY-MM-DD) ---- */
@@ -32,6 +33,7 @@ export function ProgressProvider({ children }) {
   const [streak, setStreak] = useLocalStorage(K.streak, { count: 0, lastStudiedDate: null })
   const [theme, setTheme] = useLocalStorage(K.theme, 'light')
   const [labSteps, setLabSteps] = useLocalStorage(K.labSteps, {}) // { [labId]: { [stepIndex]: true } }
+  const [userName, setUserName] = useLocalStorage(K.name, '')
 
   // apply theme to <html>
   useEffect(() => {
@@ -81,8 +83,28 @@ export function ProgressProvider({ children }) {
     setNotes({})
     setLabSteps({})
     setStreak({ count: 0, lastStudiedDate: null })
-    // theme is intentionally preserved
+    // theme and name are intentionally preserved
   }, [setCompleted, setQuizScores, setNotes, setLabSteps, setStreak])
+
+  const exportData = useCallback(() => ({
+    app: 'cyber-academy',
+    version: 1,
+    exportedAt: new Date().toISOString(),
+    name: userName,
+    completed, quizScores, notes, streak, labSteps, theme,
+  }), [userName, completed, quizScores, notes, streak, labSteps, theme])
+
+  const importData = useCallback((data) => {
+    if (!data || typeof data !== 'object' || data.app !== 'cyber-academy') return false
+    if (data.completed) setCompleted(data.completed)
+    if (data.quizScores) setQuizScores(data.quizScores)
+    if (data.notes) setNotes(data.notes)
+    if (data.streak) setStreak(data.streak)
+    if (data.labSteps) setLabSteps(data.labSteps)
+    if (data.theme) setTheme(data.theme)
+    if (typeof data.name === 'string') setUserName(data.name)
+    return true
+  }, [setCompleted, setQuizScores, setNotes, setStreak, setLabSteps, setTheme, setUserName])
 
   const toggleLabStep = useCallback((labId, stepIndex) => {
     setLabSteps((prev) => {
@@ -132,8 +154,9 @@ export function ProgressProvider({ children }) {
   )
 
   const value = {
-    completed, quizScores, notes, streak, theme, labSteps,
+    completed, quizScores, notes, streak, theme, labSteps, userName,
     toggleTheme, toggleComplete, saveQuizScore, saveNote, toggleLabStep, resetProgress,
+    setUserName, exportData, importData,
     totalLessons, completedCount, overallPct, weekProgress, nextLesson,
     labProgress, labsCompletedCount, totalLabs: labs.length,
   }

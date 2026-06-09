@@ -32,6 +32,21 @@ export default function Sidebar() {
         <span className="nav-mini-pct">{labsCompletedCount}/{totalLabs}</span>
       </NavLink>
 
+      <NavLink to="/playground" className="nav-link">
+        <span className="nav-icon">🐍</span>
+        <span className="nav-label">Playground</span>
+      </NavLink>
+
+      <NavLink to="/achievements" className="nav-link">
+        <span className="nav-icon">🏅</span>
+        <span className="nav-label">Achievements</span>
+      </NavLink>
+
+      <NavLink to="/search" className="nav-link">
+        <span className="nav-icon">🔍</span>
+        <span className="nav-label">Search</span>
+      </NavLink>
+
       <div className="sidebar-footer">
         <span className="muted theme-label" style={{ fontSize: '0.78rem' }}>Theme</span>
         <ThemeToggle />
