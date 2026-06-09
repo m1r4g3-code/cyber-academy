@@ -1,6 +1,7 @@
 import { createContext, useContext, useMemo, useCallback, useEffect } from 'react'
 import { useLocalStorage } from '../hooks/useLocalStorage'
 import { curriculum, allLessons } from '../data/curriculum'
+import { labs } from '../data/labs'
 
 const ProgressContext = createContext(null)
 
@@ -10,6 +11,7 @@ const K = {
   notes: 'cyber-academy:notes',
   streak: 'cyber-academy:streak',
   theme: 'cyber-academy:theme',
+  labSteps: 'cyber-academy:labSteps',
 }
 
 /* ---- date helpers (local time, YYYY-MM-DD) ---- */
@@ -29,6 +31,7 @@ export function ProgressProvider({ children }) {
   const [notes, setNotes] = useLocalStorage(K.notes, {})
   const [streak, setStreak] = useLocalStorage(K.streak, { count: 0, lastStudiedDate: null })
   const [theme, setTheme] = useLocalStorage(K.theme, 'light')
+  const [labSteps, setLabSteps] = useLocalStorage(K.labSteps, {}) // { [labId]: { [stepIndex]: true } }
 
   // apply theme to <html>
   useEffect(() => {
@@ -72,6 +75,15 @@ export function ProgressProvider({ children }) {
     setNotes((prev) => ({ ...prev, [lessonId]: text }))
   }, [setNotes])
 
+  const toggleLabStep = useCallback((labId, stepIndex) => {
+    setLabSteps((prev) => {
+      const lab = { ...(prev[labId] || {}) }
+      if (lab[stepIndex]) delete lab[stepIndex]
+      else { lab[stepIndex] = true; touchStreak() }
+      return { ...prev, [labId]: lab }
+    })
+  }, [setLabSteps, touchStreak])
+
   /* ---- derived selectors ---- */
   const totalLessons = allLessons.length
   const completedCount = useMemo(
@@ -94,10 +106,27 @@ export function ProgressProvider({ children }) {
     [completed]
   )
 
+  // per-lab progress: { [labId]: { done, total, pct, complete } }
+  const labProgress = useMemo(() => {
+    const map = {}
+    labs.forEach((lab) => {
+      const total = lab.steps.length
+      const done = Object.keys(labSteps[lab.id] || {}).length
+      map[lab.id] = { done, total, pct: Math.round((done / total) * 100), complete: done === total }
+    })
+    return map
+  }, [labSteps])
+
+  const labsCompletedCount = useMemo(
+    () => labs.filter((lab) => labProgress[lab.id]?.complete).length,
+    [labProgress]
+  )
+
   const value = {
-    completed, quizScores, notes, streak, theme,
-    toggleTheme, toggleComplete, saveQuizScore, saveNote,
+    completed, quizScores, notes, streak, theme, labSteps,
+    toggleTheme, toggleComplete, saveQuizScore, saveNote, toggleLabStep,
     totalLessons, completedCount, overallPct, weekProgress, nextLesson,
+    labProgress, labsCompletedCount, totalLabs: labs.length,
   }
 
   return <ProgressContext.Provider value={value}>{children}</ProgressContext.Provider>

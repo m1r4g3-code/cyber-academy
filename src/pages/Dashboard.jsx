@@ -6,7 +6,7 @@ import StreakBadge from '../components/StreakBadge'
 
 export default function Dashboard() {
   const navigate = useNavigate()
-  const { overallPct, completedCount, totalLessons, weekProgress, nextLesson, quizScores } = useProgress()
+  const { overallPct, completedCount, totalLessons, weekProgress, nextLesson, quizScores, labsCompletedCount, totalLabs } = useProgress()
 
   const quizzesTaken = Object.keys(quizScores).length
   const greeting = (() => {
@@ -73,6 +73,22 @@ export default function Dashboard() {
           )
         })}
       </div>
+
+      <div className="section-head">
+        <h2>Hands-on Labs 🧪</h2>
+        <Link to="/labs" className="btn ghost">View all →</Link>
+      </div>
+      <Link to="/labs" className="labs-promo card">
+        <div className="labs-promo-emoji">🧪</div>
+        <div>
+          <div className="wt-title">Build real portfolio projects</div>
+          <div className="wt-sub">
+            {labsCompletedCount}/{totalLabs} labs complete — guided, step-by-step builds from a
+            CLI toolbox to a full security toolkit.
+          </div>
+        </div>
+        <span className="lc-arrow">›</span>
+      </Link>
     </div>
   )
 }

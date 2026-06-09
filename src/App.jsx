@@ -3,6 +3,8 @@ import Sidebar from './components/Sidebar'
 import Dashboard from './pages/Dashboard'
 import WeekView from './pages/WeekView'
 import LessonView from './pages/LessonView'
+import Labs from './pages/Labs'
+import LabView from './pages/LabView'
 
 export default function App() {
   return (
@@ -13,6 +15,8 @@ export default function App() {
           <Route path="/" element={<Dashboard />} />
           <Route path="/week/:weekNum" element={<WeekView />} />
           <Route path="/lesson/:lessonId" element={<LessonView />} />
+          <Route path="/labs" element={<Labs />} />
+          <Route path="/lab/:labId" element={<LabView />} />
           <Route path="*" element={<Dashboard />} />
         </Routes>
       </main>

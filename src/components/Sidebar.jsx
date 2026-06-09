@@ -4,7 +4,7 @@ import { useProgress } from '../context/ProgressContext'
 import ThemeToggle from './ThemeToggle'
 
 export default function Sidebar() {
-  const { weekProgress } = useProgress()
+  const { weekProgress, labsCompletedCount, totalLabs } = useProgress()
 
   return (
     <aside className="sidebar">
@@ -25,6 +25,12 @@ export default function Sidebar() {
           <span className="nav-mini-pct">{weekProgress[w.week]?.pct ?? 0}%</span>
         </NavLink>
       ))}
+
+      <NavLink to="/labs" className="nav-link">
+        <span className="nav-icon">🧪</span>
+        <span className="nav-label">Labs</span>
+        <span className="nav-mini-pct">{labsCompletedCount}/{totalLabs}</span>
+      </NavLink>
 
       <div className="sidebar-footer">
         <span className="muted theme-label" style={{ fontSize: '0.78rem' }}>Theme</span>
