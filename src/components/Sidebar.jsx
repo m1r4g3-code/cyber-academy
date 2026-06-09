@@ -19,7 +19,7 @@ export default function Sidebar() {
       </NavLink>
 
       {curriculum.map((w) => (
-        <NavLink key={w.week} to={`/week/${w.week}`} className="nav-link">
+        <NavLink key={w.week} to={`/week/${w.week}`} className={`nav-link wk-${w.week}`}>
           <span className="nav-icon">{w.week}</span>
           <span className="nav-label">Week {w.week}</span>
           <span className="nav-mini-pct">{weekProgress[w.week]?.pct ?? 0}%</span>

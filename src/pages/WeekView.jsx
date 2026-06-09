@@ -2,11 +2,14 @@ import { useParams, Link } from 'react-router-dom'
 import { getWeek } from '../data/curriculum'
 import { useProgress } from '../context/ProgressContext'
 import LessonCard from '../components/LessonCard'
+import { useWeekTheme } from '../hooks/useWeekTheme'
 
 export default function WeekView() {
   const { weekNum } = useParams()
   const week = getWeek(weekNum)
   const { weekProgress } = useProgress()
+
+  useWeekTheme(week?.week)
 
   if (!week) {
     return <div className="center-empty">Week not found. <Link to="/">Back to dashboard</Link></div>

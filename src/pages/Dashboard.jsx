@@ -62,7 +62,7 @@ export default function Dashboard() {
         {curriculum.map((w) => {
           const wp = weekProgress[w.week] || { pct: 0, done: 0, total: w.lessons.length }
           return (
-            <Link key={w.week} to={`/week/${w.week}`} className="week-tile card">
+            <Link key={w.week} to={`/week/${w.week}`} className={`week-tile card wk-${w.week}`}>
               <ProgressRing pct={wp.pct} size={64} stroke={7} />
               <div className="wt-meta">
                 <div className="wt-title">Week {w.week}</div>

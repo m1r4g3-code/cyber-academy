@@ -150,3 +150,79 @@ button {
   .app { flex-direction: column; }
   .content { padding: 28px 20px 80px; }
 }
+
+/* ============================================================
+   GLOW-IN-THE-DARK WEEK THEMES
+   Applied by setting data-week="N" on <html> while viewing a
+   week or its lessons. Neon accent on a true-black backdrop.
+   Declared AFTER the light/dark tokens so it overrides them.
+   ============================================================ */
+
+/* Shared neon-on-black base for every week theme */
+html[data-week] {
+  --bg: #000000;
+  --bg-elevated: #070707;
+  --bg-sidebar: rgba(0, 0, 0, 0.82);
+  --card: #0b0b0c;
+  --card-hover: #161618;
+  --text: #f4fff0;
+  --text-secondary: #b9bcc2;
+  --text-tertiary: #7d8088;
+  --border: rgba(255, 255, 255, 0.1);
+  --border-strong: rgba(255, 255, 255, 0.22);
+  --ring-track: rgba(255, 255, 255, 0.1);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.6);
+  --shadow-md: 0 4px 18px rgba(0, 0, 0, 0.7);
+  --shadow-lg: 0 12px 44px rgba(0, 0, 0, 0.8);
+}
+
+/* Per-week neon accent (also reusable as .wk-N helper classes) */
+html[data-week="1"], .wk-1 { --accent: #39ff14; --accent-hover: #66ff48; --accent-soft: rgba(57, 255, 20, 0.16); }
+html[data-week="2"], .wk-2 { --accent: #18e0ff; --accent-hover: #5cecff; --accent-soft: rgba(24, 224, 255, 0.16); }
+html[data-week="3"], .wk-3 { --accent: #ff2bd6; --accent-hover: #ff66e2; --accent-soft: rgba(255, 43, 214, 0.16); }
+html[data-week="4"], .wk-4 { --accent: #b65cff; --accent-hover: #c986ff; --accent-soft: rgba(182, 92, 255, 0.18); }
+
+/* ---- Glow effects (use the active --accent so each week glows its colour) ---- */
+html[data-week] h1,
+html[data-week] h2 {
+  text-shadow: 0 0 14px var(--accent), 0 0 34px var(--accent-soft);
+}
+html[data-week] .eyebrow,
+html[data-week] .p-eyebrow {
+  text-shadow: 0 0 12px var(--accent-soft);
+}
+html[data-week] .ring-fill {
+  filter: drop-shadow(0 0 6px var(--accent));
+}
+html[data-week] .btn:not(.secondary):not(.ghost) {
+  box-shadow: 0 0 18px var(--accent-soft), 0 0 4px var(--accent);
+}
+html[data-week] .nav-link.active {
+  box-shadow: inset 0 0 0 1px var(--accent-soft), 0 0 16px var(--accent-soft);
+}
+html[data-week] .day-badge,
+html[data-week] .lab-emoji,
+html[data-week] .streak,
+html[data-week] .lab-check {
+  box-shadow: 0 0 14px var(--accent-soft);
+}
+html[data-week] .lesson-card:hover,
+html[data-week] .lab-card:hover,
+html[data-week] .week-tile:hover {
+  box-shadow: 0 0 22px var(--accent-soft);
+  border-color: var(--accent);
+}
+html[data-week] .objectives,
+html[data-week] .practical,
+html[data-week] .week-banner,
+html[data-week] .quiz {
+  border-color: var(--accent-soft);
+}
+/* keep the sidebar wordmark/logo readable + glowing */
+html[data-week] .sidebar-brand { text-shadow: 0 0 12px var(--accent-soft); }
+
+/* Helper-class glow for week tiles/nav shown OUTSIDE a week theme
+   (e.g. on the Dashboard) so each week reads in its own colour */
+.wk-1 .ring-fill, .wk-2 .ring-fill, .wk-3 .ring-fill, .wk-4 .ring-fill {
+  filter: drop-shadow(0 0 5px var(--accent));
+}

@@ -3,6 +3,7 @@ import { useParams, Link, useNavigate } from 'react-router-dom'
 import ReactMarkdown from 'react-markdown'
 import { getLesson, getAdjacent } from '../data/curriculum'
 import { useProgress } from '../context/ProgressContext'
+import { useWeekTheme } from '../hooks/useWeekTheme'
 import Quiz from '../components/Quiz'
 import NotesPanel from '../components/NotesPanel'
 
@@ -13,6 +14,9 @@ export default function LessonView() {
   const navigate = useNavigate()
   const lesson = getLesson(lessonId)
   const { completed, toggleComplete } = useProgress()
+
+  // glow-in-the-dark theme for this lesson's week
+  useWeekTheme(lesson?.week)
 
   // scroll to top whenever the lesson changes
   useEffect(() => { window.scrollTo(0, 0) }, [lessonId])
