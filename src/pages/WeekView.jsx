@@ -2,6 +2,7 @@ import { useParams, Link } from 'react-router-dom'
 import { getWeek } from '../data/curriculum'
 import { useProgress } from '../context/ProgressContext'
 import LessonCard from '../components/LessonCard'
+import Icon from '../components/Icon'
 import { useWeekTheme } from '../hooks/useWeekTheme'
 
 export default function WeekView() {
@@ -29,7 +30,7 @@ export default function WeekView() {
       </div>
 
       <div className="week-banner">
-        <strong>🎯 Goal</strong>
+        <strong className="head-with-icon"><Icon name="target" size={16} /> Goal</strong>
         <div className="goal">{week.goal}</div>
         <div className="can-do"><strong>By the end of this week you can:</strong> {week.canDo}</div>
       </div>

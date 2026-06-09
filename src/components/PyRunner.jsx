@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react'
 import { loadPyodideOnce } from '../utils/pyodide'
+import Icon from './Icon'
 
 const DEFAULT_STARTER = '# Write Python here, then press Run ▶\nprint("Hello, Cyber Academy!")\n'
 
@@ -56,7 +57,7 @@ export default function PyRunner({ starter = DEFAULT_STARTER }) {
   return (
     <section className="pyrunner card">
       <div className="pyrunner-head">
-        <span className="pyrunner-title">🐍 Try it yourself</span>
+        <span className="pyrunner-title head-with-icon"><Icon name="code" size={18} /> Try it yourself</span>
         <div className="pyrunner-actions">
           <button className="btn ghost" onClick={() => { setCode(starter); setOutput('') }} disabled={busy}>Reset</button>
           <button className="btn" onClick={run} disabled={busy}>

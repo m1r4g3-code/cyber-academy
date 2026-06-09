@@ -1,11 +1,12 @@
 import PyRunner from '../components/PyRunner'
+import Icon from '../components/Icon'
 
 export default function Playground() {
   return (
     <div>
       <div className="hero">
         <div className="eyebrow">Sandbox</div>
-        <h1>Python Playground 🐍</h1>
+        <h1 className="head-with-icon"><Icon name="playground" size={30} /> Python Playground</h1>
         <p className="lede">
           Write and run Python right here in your browser — no setup needed. Perfect for
           testing ideas, redoing a lesson exercise, or just experimenting. Your code runs

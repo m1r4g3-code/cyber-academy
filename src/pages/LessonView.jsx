@@ -8,6 +8,7 @@ import { useWeekTheme } from '../hooks/useWeekTheme'
 import Quiz from '../components/Quiz'
 import NotesPanel from '../components/NotesPanel'
 import PyRunner from '../components/PyRunner'
+import Icon from '../components/Icon'
 
 const TRACK_LABEL = { coding: 'Coding', cyber: 'Cybersecurity', both: 'Coding + Cyber' }
 
@@ -68,7 +69,7 @@ export default function LessonView() {
       </div>
 
       <div className="practical">
-        <div className="p-eyebrow">⏱️ 30-Minute Practical Session</div>
+        <div className="p-eyebrow"><Icon name="timer" size={15} /> 30-Minute Practical Session</div>
         <h3>{lesson.practical.title}</h3>
         <ol>
           {lesson.practical.steps.map((step, i) => <li key={i}>{step}</li>)}
@@ -78,7 +79,7 @@ export default function LessonView() {
 
       {relatedLab && (
         <Link to={`/lab/${relatedLab.id}`} className="related-lab card">
-          <div className="lab-emoji">{relatedLab.emoji}</div>
+          <div className="lab-emoji"><Icon name={relatedLab.icon} size={26} /></div>
           <div>
             <div className="muted" style={{ fontSize: '0.8rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
               Go deeper · Hands-on Lab
@@ -100,11 +101,11 @@ export default function LessonView() {
 
       {lesson.resources?.length > 0 && (
         <section className="resources">
-          <h3>📚 Free resources</h3>
+          <h3 className="head-with-icon"><Icon name="resources" size={18} /> Free resources</h3>
           <div className="res-list">
             {lesson.resources.map((r, i) => (
               <a key={i} href={r.url} target="_blank" rel="noreferrer" className="res-item">
-                <span>🔗</span>
+                <Icon name="link" size={16} />
                 <span>{r.label}</span>
                 <span className="res-ext">open ↗</span>
               </a>

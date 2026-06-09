@@ -2,6 +2,7 @@ import { useState, useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import { allLessons } from '../data/curriculum'
 import { labs } from '../data/labs'
+import Icon from '../components/Icon'
 
 // Build a lightweight search index once.
 const index = [
@@ -10,7 +11,7 @@ const index = [
     to: `/lesson/${l.id}`,
     title: l.title,
     sub: `Day ${l.day} · Week ${l.week}`,
-    emoji: '📘',
+    icon: 'lesson',
     haystack: [
       l.title,
       ...(l.objectives || []),
@@ -23,7 +24,7 @@ const index = [
     to: `/lab/${lab.id}`,
     title: lab.title,
     sub: `Lab · Week ${lab.week} · ${lab.difficulty}`,
-    emoji: lab.emoji,
+    icon: lab.icon,
     haystack: [lab.title, lab.summary, ...(lab.objectives || [])].join(' ').toLowerCase(),
   })),
 ]
@@ -41,7 +42,7 @@ export default function Search() {
     <div>
       <div className="hero">
         <div className="eyebrow">Find anything</div>
-        <h1>Search 🔍</h1>
+        <h1 className="head-with-icon"><Icon name="search" size={30} /> Search</h1>
       </div>
 
       <input
@@ -62,7 +63,7 @@ export default function Search() {
       <div className="lesson-list">
         {results.map((r) => (
           <Link key={r.type + r.to} to={r.to} className="lesson-card card">
-            <div className="day-badge" style={{ fontSize: '1.3rem' }}>{r.emoji}</div>
+            <div className="day-badge"><Icon name={r.icon} size={22} /></div>
             <div className="lc-body">
               <div className="lc-title">{r.title}</div>
               <div className="lc-meta"><span className="muted">{r.sub}</span></div>

@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { useProgress } from '../context/ProgressContext'
+import Icon from './Icon'
 
 /**
  * Per-lesson notes with debounced autosave to localStorage (via context).
@@ -29,7 +30,7 @@ export default function NotesPanel({ lessonId }) {
 
   return (
     <section className="notes">
-      <h3>📝 My notes</h3>
+      <h3 className="head-with-icon"><Icon name="notes" size={18} /> My notes</h3>
       <textarea
         value={text}
         onChange={onChange}

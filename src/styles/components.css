@@ -765,6 +765,20 @@
 }
 .search-input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); }
 
+/* ---------- Icons (Lucide) ---------- */
+svg.lucide { vertical-align: middle; flex-shrink: 0; }
+.head-with-icon { display: inline-flex; align-items: center; gap: 8px; }
+.head-with-icon svg { color: var(--accent); }
+.nav-icon { display: inline-flex; align-items: center; justify-content: center; }
+.sidebar-brand .logo { display: inline-flex; color: var(--accent); }
+.lab-emoji svg, .labs-promo-emoji svg { color: var(--accent); }
+.badge-emoji { display: flex; justify-content: center; line-height: 0; }
+.badge.earned .badge-emoji { color: var(--accent); }
+.badge.locked .badge-emoji { color: var(--text-tertiary); }
+.theme-toggle .knob svg { display: block; color: var(--text); }
+.cert-seal { display: flex; justify-content: center; }
+.streak .flame { color: currentColor; }
+
 /* ---------- Misc ---------- */
 .divider { height: 1px; background: var(--border); margin: 36px 0; border: none; }
 .muted { color: var(--text-secondary); }

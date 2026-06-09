@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useProgress } from '../context/ProgressContext'
+import Icon from './Icon'
 
 const LETTERS = ['A', 'B', 'C', 'D', 'E']
 
@@ -36,7 +37,7 @@ export default function Quiz({ lessonId, questions }) {
 
   return (
     <section className="quiz card">
-      <h3>🧠 Knowledge check</h3>
+      <h3 className="head-with-icon"><Icon name="brain" size={20} /> Knowledge check</h3>
       <p className="quiz-sub">
         {prevBest ? `Best score: ${prevBest.correct}/${prevBest.total}. ` : ''}
         Answer all {questions.length} to record your score.

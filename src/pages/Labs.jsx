@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { labs } from '../data/labs'
 import { useProgress } from '../context/ProgressContext'
 import ProgressRing from '../components/ProgressRing'
+import Icon from '../components/Icon'
 
 const TRACK_LABEL = { coding: 'Coding', cyber: 'Cyber', both: 'Coding + Cyber' }
 const DIFF_CLASS = { Beginner: 'beginner', Intermediate: 'intermediate', Advanced: 'advanced' }
@@ -13,7 +14,7 @@ export default function Labs() {
     <div>
       <div className="hero">
         <div className="eyebrow">Hands-on</div>
-        <h1>Labs 🧪</h1>
+        <h1 className="head-with-icon"><Icon name="labs" size={30} /> Labs</h1>
         <p className="lede">
           Larger, guided projects you build step by step. Each one becomes a real
           portfolio piece — check off steps as you go and watch your progress fill.
@@ -29,7 +30,7 @@ export default function Labs() {
           const lp = labProgress[lab.id] || { pct: 0, done: 0, total: lab.steps.length, complete: false }
           return (
             <Link key={lab.id} to={`/lab/${lab.id}`} className={`lab-card card wk-${lab.week} ${lp.complete ? 'done' : ''}`}>
-              <div className="lab-emoji">{lab.emoji}</div>
+              <div className="lab-emoji"><Icon name={lab.icon} size={26} /></div>
               <div className="lc-body">
                 <div className="lc-title">{lab.title}</div>
                 <div className="lc-meta">

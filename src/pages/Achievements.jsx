@@ -1,5 +1,6 @@
 import { achievements } from '../data/achievements'
 import { useProgress } from '../context/ProgressContext'
+import Icon from '../components/Icon'
 
 export default function Achievements() {
   const ctx = useProgress()
@@ -13,7 +14,7 @@ export default function Achievements() {
     <div>
       <div className="hero">
         <div className="eyebrow">Milestones</div>
-        <h1>Achievements 🏅</h1>
+        <h1 className="head-with-icon"><Icon name="achievements" size={30} /> Achievements</h1>
         <p className="lede">
           {earnedCount}/{achievements.length} badges earned. Keep going — finish all 30 lessons
           to unlock your Certificate of Completion.
@@ -25,7 +26,9 @@ export default function Achievements() {
           const got = a.test(ctx)
           return (
             <div key={a.id} className={`badge card ${got ? 'earned' : 'locked'}`}>
-              <div className="badge-emoji">{got ? a.emoji : '🔒'}</div>
+              <div className="badge-emoji">
+                <Icon name={got ? a.icon : 'lock'} size={34} color={got ? a.color : undefined} />
+              </div>
               <div className="badge-title">{a.title}</div>
               <div className="badge-desc">{a.desc}</div>
             </div>
@@ -33,7 +36,7 @@ export default function Achievements() {
         })}
       </div>
 
-      <div className="section-head"><h2>Certificate of Completion 🎓</h2></div>
+      <div className="section-head"><h2 className="head-with-icon"><Icon name="graduate" size={22} /> Certificate of Completion</h2></div>
 
       <div className="cert-name-row card">
         <label htmlFor="certname">Name on certificate</label>
@@ -50,7 +53,7 @@ export default function Achievements() {
         <>
           <div className="certificate" id="certificate">
             <div className="cert-inner">
-              <div className="cert-seal">🛡️</div>
+              <div className="cert-seal"><Icon name="shield" size={48} color="var(--accent)" /></div>
               <div className="cert-eyebrow">Cyber Academy</div>
               <h2 className="cert-h">Certificate of Completion</h2>
               <p className="cert-sub">This certifies that</p>
@@ -66,12 +69,12 @@ export default function Achievements() {
             </div>
           </div>
           <div className="lesson-actions">
-            <button className="btn" onClick={() => window.print()}>🖨️ Print / Save as PDF</button>
+            <button className="btn" onClick={() => window.print()}>Print / Save as PDF</button>
           </div>
         </>
       ) : (
         <div className="cert-locked card">
-          <div className="badge-emoji">🔒</div>
+          <div className="badge-emoji"><Icon name="lock" size={28} /></div>
           <div>
             <strong>Certificate locked</strong>
             <div className="muted" style={{ marginTop: 4 }}>

@@ -4,6 +4,7 @@ import { curriculum } from '../data/curriculum'
 import { useProgress } from '../context/ProgressContext'
 import ProgressRing from '../components/ProgressRing'
 import StreakBadge from '../components/StreakBadge'
+import Icon from '../components/Icon'
 
 export default function Dashboard() {
   const navigate = useNavigate()
@@ -51,7 +52,7 @@ export default function Dashboard() {
     <div>
       <div className="hero">
         <div className="eyebrow">Your journey</div>
-        <h1>{greeting} 👋</h1>
+        <h1>{greeting}</h1>
         <p className="lede">
           From complete beginner to a real foundation in coding and cybersecurity —
           30 days, one lesson at a time. Pick up where you left off.
@@ -79,7 +80,7 @@ export default function Dashboard() {
               {completedCount === 0 ? 'Start Day 1' : 'Continue where you left off'} →
             </button>
           ) : (
-            <div className="lesson-complete-banner">🎉 You finished all 30 days — incredible work!</div>
+            <div className="lesson-complete-banner"><Icon name="party" size={18} /> You finished all 30 days — incredible work!</div>
           )}
         </div>
       </div>
@@ -106,11 +107,11 @@ export default function Dashboard() {
       </div>
 
       <div className="section-head">
-        <h2>Hands-on Labs 🧪</h2>
+        <h2 className="head-with-icon"><Icon name="labs" size={22} /> Hands-on Labs</h2>
         <Link to="/labs" className="btn ghost">View all →</Link>
       </div>
       <Link to="/labs" className="labs-promo card">
-        <div className="labs-promo-emoji">🧪</div>
+        <div className="labs-promo-emoji"><Icon name="labs" size={28} /></div>
         <div>
           <div className="wt-title">Build real portfolio projects</div>
           <div className="wt-sub">
@@ -123,8 +124,8 @@ export default function Dashboard() {
 
       <div className="reset-zone">
         <div className="data-row">
-          <button className="btn secondary" onClick={handleExport}>⬇ Export progress</button>
-          <button className="btn secondary" onClick={() => fileRef.current?.click()}>⬆ Import progress</button>
+          <button className="btn secondary btn-icon" onClick={handleExport}><Icon name="download" size={16} /> Export progress</button>
+          <button className="btn secondary btn-icon" onClick={() => fileRef.current?.click()}><Icon name="upload" size={16} /> Import progress</button>
           <input ref={fileRef} type="file" accept="application/json,.json" onChange={handleImportFile} hidden />
           {dataMsg && <span className="muted" style={{ fontSize: '0.85rem' }}>{dataMsg}</span>}
         </div>

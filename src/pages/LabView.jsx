@@ -5,6 +5,7 @@ import { getLab } from '../data/labs'
 import { useProgress } from '../context/ProgressContext'
 import { useWeekTheme } from '../hooks/useWeekTheme'
 import ProgressRing from '../components/ProgressRing'
+import Icon from '../components/Icon'
 
 const TRACK_LABEL = { coding: 'Coding', cyber: 'Cybersecurity', both: 'Coding + Cyber' }
 
@@ -32,8 +33,8 @@ export default function LabView() {
           <Link to="/labs">Labs</Link> › {lab.title}
           {lab.lessonId && <> · <Link to={`/lesson/${lab.lessonId}`}>↩ related lesson (Week {lab.week})</Link></>}
         </div>
-        <div className="eyebrow" style={{ color: 'var(--accent)', fontWeight: 600, fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
-          {lab.emoji} {lab.difficulty} · {TRACK_LABEL[lab.track]} · {lab.time}
+        <div className="eyebrow head-with-icon" style={{ color: 'var(--accent)', fontWeight: 600, fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+          <Icon name={lab.icon} size={15} /> {lab.difficulty} · {TRACK_LABEL[lab.track]} · {lab.time}
         </div>
         <h1>{lab.title}</h1>
         <p className="lede" style={{ marginTop: 10 }}>{lab.summary}</p>
@@ -44,7 +45,7 @@ export default function LabView() {
         <div>
           <div className="lc-title">{lp.done}/{lp.total} steps done</div>
           <div className="muted">
-            {lp.complete ? '🎉 Lab complete — add it to your portfolio!' : 'Tick each step as you finish it.'}
+            {lp.complete ? 'Lab complete — add it to your portfolio!' : 'Tick each step as you finish it.'}
           </div>
         </div>
       </div>
@@ -88,13 +89,13 @@ export default function LabView() {
       </ol>
 
       <div className="practical" style={{ marginTop: 32 }}>
-        <div className="p-eyebrow">🎯 Deliverable</div>
+        <div className="p-eyebrow head-with-icon"><Icon name="target" size={15} /> Deliverable</div>
         <p style={{ marginTop: 8 }}>{lab.deliverable}</p>
       </div>
 
       {lab.stretch?.length > 0 && (
         <section className="resources">
-          <h3>🚀 Stretch goals</h3>
+          <h3 className="head-with-icon"><Icon name="rocket" size={18} /> Stretch goals</h3>
           <ul className="prose">
             {lab.stretch.map((s, i) => <li key={i}>{s}</li>)}
           </ul>
